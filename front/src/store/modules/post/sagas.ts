@@ -65,7 +65,35 @@ function* createPost({ callback, type, payload }) {
 }
 
 
+function* fetchPostDetail({ callback, type, payload }) {
+  const { slug } = payload
+
+  try {
+    const response: AxiosResponse<IPost> = yield call(api.get, 'post-detail', { slug })
+
+    if(response.status == 200) {
+      yield put({
+        type: PostTypes.FETCH_POST_DETAIL_SUCCESS,
+        payload: response.data
+      })
+
+      if(typeof(callback) == 'object' && has(callback, 'onfinish'))
+        callback.onfinish(response)
+    }
+  } catch(error) {
+    showErrorMessage(error, 'Aconteceu um erro ao tentar buscar as informações da postagem')
+
+    if(typeof(callback) == 'object' && has(callback, 'onerror'))
+      callback.onerror(error)
+  }
+
+  if(typeof(callback) == 'function')
+    callback()
+}
+
+
 export default all([
   takeLatest(PostTypes.FETCH_POSTS, fetchPosts),
-  takeLatest(PostTypes.CREATE_POST, createPost)
+  takeLatest(PostTypes.CREATE_POST, createPost),
+  takeLatest(PostTypes.FETCH_POST_DETAIL, fetchPostDetail),
 ])

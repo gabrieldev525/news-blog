@@ -8,6 +8,7 @@ import { IRouteItem } from './types'
 import CategoryCreate from '../containers/category/category-create'
 import Post from '../containers/post'
 import PostCreate from '../containers/post/post-create'
+import PostDetail from '../containers/post/post-detail'
 
 const Route: IRouteItem[] = [
   {
@@ -41,6 +42,11 @@ const Route: IRouteItem[] = [
         component: PostCreate,
         exact: true,
         path: '/post/create'
+      },
+      {
+        component: PostDetail,
+        exact: true,
+        path: '/post/detail/:post_slug'
       }
     ]
   }

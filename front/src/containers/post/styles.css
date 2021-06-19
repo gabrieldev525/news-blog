@@ -1,0 +1,9 @@
+.post-detail-content {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.post-detail-image {
+    max-width: 40%;
+}

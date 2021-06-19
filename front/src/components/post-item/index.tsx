@@ -1,11 +1,9 @@
 // React
 import React from 'react'
+import { Link } from 'react-router-dom'
 
 // Third party
 import { truncate } from 'lodash'
-
-// Project
-import Truncate from '../../components/truncate'
 
 // Local
 import { IPostItem } from './types'
@@ -15,7 +13,9 @@ const PostItem = ({ data, isRecentlyNews=false }: IPostItem) => {
   return (
     <div className={`post-item ${isRecentlyNews && 'main-news'}`}>
       <img className='post-image' src={data.image} />
-      <h1 className='post-title'>{data.title}</h1>
+      <h1 className='post-title'>
+        <Link to={`/post/detail/${data.slug}`}>{data.title}</Link>
+      </h1>
       <span className='post-description'>
         { truncate(data.description, { length: 80 }) }
       </span>

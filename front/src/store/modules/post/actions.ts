@@ -18,3 +18,13 @@ export const createPost = (data, callback={}) => {
     callback
   }
 }
+
+export const fetchPostDetail = (slug, callback={}) => {
+  return {
+    payload: {
+      slug
+    },
+    type: PostTypes.FETCH_POST_DETAIL,
+    callback
+  }
+}

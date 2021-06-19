@@ -8,6 +8,9 @@ import { map } from 'lodash'
 import RouteWithSubRoutes from '../../components/common/route-with-sub-routes'
 import { IProps } from '../../utils'
 
+// Local
+import './styles.css'
+
 
 const Post: React.FC<IProps> = (props) => {
   return (
