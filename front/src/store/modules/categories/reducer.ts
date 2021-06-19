@@ -6,7 +6,7 @@ import { Reducer } from 'redux'
 import { state_default } from '../../utils'
 
 // local
-import { PostTypes } from './types'
+import { CategoryTypes } from './types'
 
 const default_state = {
   ...state_default,
@@ -16,7 +16,7 @@ const default_state = {
 export default (state = default_state, action) => {
   return produce(state, draft => {
     switch (action.type) {
-      case PostTypes.FETCH_POSTS_SUCCESS:
+      case CategoryTypes.FETCH_CATEGORIES_SUCCESS:
         return action.payload
       default:
         return draft

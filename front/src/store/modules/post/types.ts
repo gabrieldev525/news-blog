@@ -7,6 +7,7 @@ export enum PostTypes {
 
 
 export interface IPost {
+  id: number,
   title: string,
   description: string,
   slug: string,

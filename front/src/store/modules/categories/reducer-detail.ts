@@ -1,22 +1,25 @@
 // third party
 import produce from 'immer'
-import { Reducer } from 'redux'
 
 // Project
 import { state_default } from '../../utils'
 
 // local
-import { PostTypes } from './types'
+import { CategoryTypes } from './types'
 
 const default_state = {
-  ...state_default,
-  results: []
+  id: null,
+  title: '',
+  description: '',
+  slug: '',
+  created: '',
+  modified: ''
 }
 
 export default (state = default_state, action) => {
   return produce(state, draft => {
     switch (action.type) {
-      case PostTypes.FETCH_POSTS_SUCCESS:
+      case CategoryTypes.FETCH_CATEGORY_DETAIL_SUCCESS:
         return action.payload
       default:
         return draft

@@ -11,7 +11,7 @@ import { showErrorMessage } from '../../utils'
 import { PostTypes, IPost } from './types'
 
 
-function* fetchBehaviourScenarios({ callback, type, payload }) {
+function* fetchPosts({ callback, type, payload }) {
   const { filters } = payload
 
   try {
@@ -39,5 +39,5 @@ function* fetchBehaviourScenarios({ callback, type, payload }) {
 
 
 export default all([
-  takeLatest(PostTypes.FETCH_POSTS, fetchBehaviourScenarios)
+  takeLatest(PostTypes.FETCH_POSTS, fetchPosts)
 ])
