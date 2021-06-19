@@ -64,6 +64,7 @@ const TopMenu = () => {
             </Dropdown>
           )
         }
+        <Menu.Item as={Link} to='/post/create'>Criar Postagem</Menu.Item>
       </Menu.Menu>
 
       <Menu.Item as={ Link } to='/' className='logo-menu'>

@@ -18,6 +18,10 @@ export default (state = default_state, action) => {
     switch (action.type) {
       case PostTypes.FETCH_POSTS_SUCCESS:
         return action.payload
+      case PostTypes.CREATE_POST_SUCCESS:
+        draft.results.push(action.payload)
+        draft.count += 1
+        return draft
       default:
         return draft
     }

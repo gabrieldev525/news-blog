@@ -5,8 +5,10 @@ import { useHistory } from 'react-router-dom'
 
 // Third party
 import { Form } from 'semantic-ui-react'
-import { createCategory } from '../../store/modules/categories/actions'
 import { toast } from 'react-toastify'
+
+// Project
+import { createCategory } from '../../store/modules/categories/actions'
 
 
 const CategoryCreate = () => {

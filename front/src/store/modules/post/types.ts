@@ -2,7 +2,9 @@ import { IStateDefaultType } from "../../utils/types";
 
 export enum PostTypes {
   FETCH_POSTS = 'FETCH_POSTS',
-  FETCH_POSTS_SUCCESS = 'FETCH_POSTS_SUCCESS'
+  FETCH_POSTS_SUCCESS = 'FETCH_POSTS_SUCCESS',
+  CREATE_POST = 'CREATE_POST',
+  CREATE_POST_SUCCESS = 'CREATE_POST_SUCCESS',
 }
 
 

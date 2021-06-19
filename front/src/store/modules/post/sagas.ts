@@ -2,6 +2,7 @@
 import { all, call, put, takeLatest } from 'redux-saga/effects'
 import { has } from 'lodash'
 import { AxiosResponse } from 'axios'
+import { toast } from 'react-toastify'
 
 // Project
 import { api } from '../../../services/api'
@@ -37,7 +38,34 @@ function* fetchPosts({ callback, type, payload }) {
     callback()
 }
 
+function* createPost({ callback, type, payload }) {
+  try {
+    const response: AxiosResponse<IPost> = yield call(api.post, 'post-list', {}, payload)
+
+    if(response.status == 201) {
+      yield put({
+        type: PostTypes.CREATE_POST_SUCCESS,
+        payload: response.data
+      })
+
+      toast.success('Categoria criada com sucesso')
+
+      if(typeof(callback) == 'object' && has(callback, 'onfinish'))
+        callback.onfinish(response)
+    }
+  } catch(error) {
+    showErrorMessage(error, 'Aconteceu um erro ao tentar criar uma nova postagem')
+
+    if(typeof(callback) == 'object' && has(callback, 'onerror'))
+      callback.onerror(error)
+  }
+
+  if(typeof(callback) == 'function')
+    callback()
+}
+
 
 export default all([
-  takeLatest(PostTypes.FETCH_POSTS, fetchPosts)
+  takeLatest(PostTypes.FETCH_POSTS, fetchPosts),
+  takeLatest(PostTypes.CREATE_POST, createPost)
 ])

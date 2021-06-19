@@ -6,6 +6,8 @@ import CategoryDetail from '../containers/category/category-detail'
 // local imports
 import { IRouteItem } from './types'
 import CategoryCreate from '../containers/category/category-create'
+import Post from '../containers/post'
+import PostCreate from '../containers/post/post-create'
 
 const Route: IRouteItem[] = [
   {
@@ -27,6 +29,18 @@ const Route: IRouteItem[] = [
         component: CategoryCreate,
         exact: true,
         path: '/category/create'
+      }
+    ]
+  },
+  {
+    component: Post,
+    exact: false,
+    path: '/post',
+    routes: [
+      {
+        component: PostCreate,
+        exact: true,
+        path: '/post/create'
       }
     ]
   }
