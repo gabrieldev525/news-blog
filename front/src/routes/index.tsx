@@ -5,6 +5,7 @@ import CategoryDetail from '../containers/category/category-detail'
 
 // local imports
 import { IRouteItem } from './types'
+import CategoryCreate from '../containers/category/category-create'
 
 const Route: IRouteItem[] = [
   {
@@ -20,7 +21,12 @@ const Route: IRouteItem[] = [
       {
         component: CategoryDetail,
         exact: true,
-        path: '/category/:category_slug'
+        path: '/category/detail/:category_slug'
+      },
+      {
+        component: CategoryCreate,
+        exact: true,
+        path: '/category/create'
       }
     ]
   }

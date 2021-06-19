@@ -17,7 +17,7 @@ import RouteWithSubRoutes from './components/common/route-with-sub-routes'
 // statics
 import './static/css/app.css'
 
-import Route from './routes/Route'
+import Route from './routes'
 
 const App = () => {
   const dispatch = useDispatch()

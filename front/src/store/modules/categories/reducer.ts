@@ -18,6 +18,11 @@ export default (state = default_state, action) => {
     switch (action.type) {
       case CategoryTypes.FETCH_CATEGORIES_SUCCESS:
         return action.payload
+
+      case CategoryTypes.CREATE_CATEGORY:
+        draft.results.push(action.payload)
+        draft.count += 1
+        return draft
       default:
         return draft
     }

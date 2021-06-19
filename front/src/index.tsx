@@ -10,6 +10,7 @@ import {
 import { Provider } from 'react-redux'
 import 'semantic-ui-css/semantic.min.css'
 import { ToastContainer, Slide } from 'react-toastify'
+import 'react-toastify/dist/ReactToastify.css';
 
 // local
 import store from "./store"

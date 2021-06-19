@@ -2,6 +2,7 @@
 import { all, call, put, takeLatest } from 'redux-saga/effects'
 import { has } from 'lodash'
 import { AxiosResponse } from 'axios'
+import { toast } from 'react-toastify'
 
 // Project
 import { api } from '../../../services/api'
@@ -64,8 +65,35 @@ function* fetchCategoryDetail({ callback, type, payload }) {
     callback()
 }
 
+function* createCategory({ callback, type, payload }) {
+  try {
+    const response: AxiosResponse<ICategory> = yield call(api.post, 'category-list', {}, payload)
+
+    if(response.status == 201) {
+      yield put({
+        type: CategoryTypes.CREATE_CATEGORY_SUCCESS,
+        payload: response.data
+      })
+
+      toast.success('Categoria criada com sucesso')
+
+      if(typeof(callback) == 'object' && has(callback, 'onfinish'))
+        callback.onfinish(response)
+    }
+  } catch(error) {
+    showErrorMessage(error, 'Aconteceu um erro ao tentar criar uma nova categoria')
+
+    if(typeof(callback) == 'object' && has(callback, 'onerror'))
+      callback.onerror(error)
+  }
+
+  if(typeof(callback) == 'function')
+    callback()
+}
+
 
 export default all([
   takeLatest(CategoryTypes.FETCH_CATEGORIES, fetchCategories),
-  takeLatest(CategoryTypes.FETCH_CATEGORY_DETAIL, fetchCategoryDetail)
+  takeLatest(CategoryTypes.FETCH_CATEGORY_DETAIL, fetchCategoryDetail),
+  takeLatest(CategoryTypes.CREATE_CATEGORY, createCategory),
 ])
