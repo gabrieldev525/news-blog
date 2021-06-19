@@ -46,3 +46,6 @@
 .flex-row {
     display: flex !important;
 }
+.pointer {
+    cursor: pointer !important;
+}

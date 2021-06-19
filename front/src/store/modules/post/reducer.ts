@@ -1,5 +1,6 @@
 // third party
 import produce from 'immer'
+import { remove } from 'lodash'
 
 // Project
 import { state_default } from '../../utils'
@@ -19,7 +20,14 @@ export default (state = default_state, action) => {
         return action.payload
       case PostTypes.CREATE_POST_SUCCESS:
         draft.results.push(action.payload)
-        draft.count += 1
+        draft.count++
+        return draft
+      case PostTypes.DELETE_POST_SUCCESS:
+        let removedElement = remove(draft.results, o => o.slug == action.payload)
+
+        if(removedElement)
+          draft.count--
+
         return draft
       default:
         return draft

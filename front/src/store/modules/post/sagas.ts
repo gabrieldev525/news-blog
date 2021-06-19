@@ -48,7 +48,7 @@ function* createPost({ callback, type, payload }) {
         payload: response.data
       })
 
-      toast.success('Categoria criada com sucesso')
+      toast.success('Postagem criada com sucesso')
 
       if(typeof(callback) == 'object' && has(callback, 'onfinish'))
         callback.onfinish(response)
@@ -92,8 +92,38 @@ function* fetchPostDetail({ callback, type, payload }) {
 }
 
 
+function* deletePost({ callback, type, payload }) {
+  const { slug } = payload
+
+  try {
+    const response: AxiosResponse<IPost> = yield call(api.delete, 'post-detail', { slug })
+
+    if([200, 202, 204].indexOf(response.status) != -1) {
+      yield put({
+        type: PostTypes.DELETE_POST_SUCCESS,
+        payload: slug
+      })
+
+      toast.success('Postagem deletada com sucesso')
+
+      if(typeof(callback) == 'object' && has(callback, 'onfinish'))
+        callback.onfinish(response)
+    }
+  } catch(error) {
+    showErrorMessage(error, 'Aconteceu um erro ao tentar deletar uma postagem')
+
+    if(typeof(callback) == 'object' && has(callback, 'onerror'))
+      callback.onerror(error)
+  }
+
+  if(typeof(callback) == 'function')
+    callback()
+}
+
+
 export default all([
   takeLatest(PostTypes.FETCH_POSTS, fetchPosts),
   takeLatest(PostTypes.CREATE_POST, createPost),
   takeLatest(PostTypes.FETCH_POST_DETAIL, fetchPostDetail),
+  takeLatest(PostTypes.DELETE_POST, deletePost),
 ])

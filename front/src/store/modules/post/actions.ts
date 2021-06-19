@@ -28,3 +28,13 @@ export const fetchPostDetail = (slug, callback={}) => {
     callback
   }
 }
+
+export const deletePost = (slug, callback={}) => {
+  return {
+    payload: {
+      slug
+    },
+    type: PostTypes.DELETE_POST,
+    callback
+  }
+}
