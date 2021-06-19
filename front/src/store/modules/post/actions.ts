@@ -1,5 +1,5 @@
 // Local
-import { PostTypes } from './types'
+import { IPost, PostTypes } from './types'
 
 export const fetchPosts = (filters={}, callback={}) => {
   return {
@@ -35,6 +35,17 @@ export const deletePost = (slug, callback={}) => {
       slug
     },
     type: PostTypes.DELETE_POST,
+    callback
+  }
+}
+
+export const editPost = (slug, data, callback={}) => {
+  return {
+    payload: {
+      slug,
+      data
+    },
+    type: PostTypes.EDIT_POST,
     callback
   }
 }

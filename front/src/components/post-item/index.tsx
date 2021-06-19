@@ -1,6 +1,6 @@
 // React
 import React from 'react'
-import { Link } from 'react-router-dom'
+import { Link, useHistory } from 'react-router-dom'
 import { useDispatch } from 'react-redux'
 
 // Third party
@@ -18,6 +18,7 @@ const PostItem = ({ data, isRecentlyNews=false }: IPostItem) => {
 
   // hooks
   const dispatch = useDispatch()
+  const history = useHistory()
 
   const onClickRemovePost = () => {
     dispatch(deletePost(data.slug))
@@ -27,11 +28,18 @@ const PostItem = ({ data, isRecentlyNews=false }: IPostItem) => {
     <div className={`post-item ${isRecentlyNews && 'main-news'}`}>
       <img className='post-image' src={data.image} />
 
-      <Icon
-        name='trash alternate'
-        color='red'
-        className='pointer'
-        onClick={onClickRemovePost} />
+      <div className='flex-row'>
+        <Icon
+          name='trash alternate'
+          color='red'
+          className='pointer'
+          onClick={onClickRemovePost} />
+
+        <Icon
+          name='edit'
+          className='pointer'
+          onClick={() => history.push(`/post/edit/${data.slug}`)} />
+      </div>
 
       <h1 className='post-title'>
         <Link to={`/post/detail/${data.slug}`}>{data.title}</Link>

@@ -121,9 +121,39 @@ function* deletePost({ callback, type, payload }) {
 }
 
 
+function* editPost({ callback, type, payload }) {
+  const { slug, data } = payload
+
+  try {
+    const response: AxiosResponse<IPost> = yield call(api.patch, 'post-detail', { slug }, data)
+
+    if(response.status == 200) {
+      yield put({
+        type: PostTypes.EDIT_POST_SUCCESS,
+        payload: data
+      })
+
+      toast.success('Postagem editada com sucesso')
+
+      if(typeof(callback) == 'object' && has(callback, 'onfinish'))
+        callback.onfinish(response)
+    }
+  } catch(error) {
+    showErrorMessage(error, 'Aconteceu um erro ao tentar editar uma postagem')
+
+    if(typeof(callback) == 'object' && has(callback, 'onerror'))
+      callback.onerror(error)
+  }
+
+  if(typeof(callback) == 'function')
+    callback()
+}
+
+
 export default all([
   takeLatest(PostTypes.FETCH_POSTS, fetchPosts),
   takeLatest(PostTypes.CREATE_POST, createPost),
   takeLatest(PostTypes.FETCH_POST_DETAIL, fetchPostDetail),
   takeLatest(PostTypes.DELETE_POST, deletePost),
+  takeLatest(PostTypes.EDIT_POST, editPost),
 ])

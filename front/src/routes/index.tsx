@@ -7,7 +7,7 @@ import CategoryDetail from '../containers/category/category-detail'
 import { IRouteItem } from './types'
 import CategoryCreate from '../containers/category/category-create'
 import Post from '../containers/post'
-import PostCreate from '../containers/post/post-create'
+import PostForm from '../containers/post/post-form'
 import PostDetail from '../containers/post/post-detail'
 
 const Route: IRouteItem[] = [
@@ -39,9 +39,14 @@ const Route: IRouteItem[] = [
     path: '/post',
     routes: [
       {
-        component: PostCreate,
+        component: PostForm,
         exact: true,
         path: '/post/create'
+      },
+      {
+        component: PostForm,
+        exact: true,
+        path: '/post/edit/:post_slug'
       },
       {
         component: PostDetail,

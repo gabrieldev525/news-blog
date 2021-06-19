@@ -1,6 +1,6 @@
 // third party
 import produce from 'immer'
-import { remove } from 'lodash'
+import { find, findIndex, remove } from 'lodash'
 
 // Project
 import { state_default } from '../../utils'
@@ -28,6 +28,11 @@ export default (state = default_state, action) => {
         if(removedElement)
           draft.count--
 
+        return draft
+      case PostTypes.EDIT_POST_SUCCESS:
+        let postIdx = findIndex(draft.results, o => o.slug == action.payload.slug)
+        if(postIdx)
+          draft.results[postIdx] = action.payload
         return draft
       default:
         return draft

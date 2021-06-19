@@ -1,7 +1,7 @@
 // React
 import React, { useEffect, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
-import { useHistory } from 'react-router-dom'
+import { useHistory, useParams } from 'react-router-dom'
 
 // Third party
 import { Form } from 'semantic-ui-react'
@@ -10,9 +10,13 @@ import { map, isEmpty } from 'lodash'
 
 // Project
 import { fetchCategories } from '../../store/modules/categories/actions'
-import { createPost } from '../../store/modules/post/actions'
+import { createPost, editPost, fetchPostDetail } from '../../store/modules/post/actions'
 import { IState } from '../../store/modules/types'
 import { ICategoryState } from '../../store/modules/categories/types'
+
+// Local
+import { IPostParams } from './types'
+import { IPost } from '../../store/modules/post/types'
 
 
 const PostCreate = () => {
@@ -21,18 +25,33 @@ const PostCreate = () => {
   const [title, setTitle] = useState('')
   const [description, setDescription] = useState('')
   const [image, setImage] = useState('')
-  const [category, setCategory] = useState('')
+  const [category, setCategory] = useState(null)
 
   // hooks
   const dispatch = useDispatch()
   const history = useHistory()
+  const params: IPostParams = useParams()
 
   // redux
   const categories = useSelector<IState, ICategoryState>(store => store.categories)
+  const post_detail = useSelector<IState, IPost>(store => store.post_detail)
 
   useEffect(() => {
     dispatch(fetchCategories())
   }, [])
+
+  useEffect(() => {
+    if(params.post_slug) {
+      dispatch(fetchPostDetail(params.post_slug))
+    }
+  }, [params.post_slug])
+
+  useEffect(() => {
+    setTitle(post_detail.title)
+    setDescription(post_detail.description)
+    setImage(post_detail.image)
+    setCategory(post_detail.category)
+  }, [post_detail.slug])
 
   const handleChange = (event, { value, name }) => {
     if(name == 'title')
@@ -51,17 +70,37 @@ const PostCreate = () => {
       return
     }
 
-    const data = new FormData()
-    data.append('title', title)
-    data.append('description', description)
-    data.append('category', category)
-    data.append('image', image)
+    if(params.post_slug) {  // edit
+      const data = new FormData()
 
-    dispatch(createPost(data, {
-      onfinish: (response) => {
-        history.push(`/post/detail/${response.data.slug}`)
-      }
-    }))
+      if(title != post_detail.title)
+        data.append('title', title)
+      if(description != post_detail.description)
+        data.append('description', description)
+      if(image != post_detail.image)
+        data.append('image', image)
+      if(category != post_detail.category)
+        data.append('category', category)
+
+      dispatch(editPost(params.post_slug, data, {
+        onfinish: (response) => {
+          history.push(`/post/detail/${response.data.slug}`)
+        }
+      }))
+
+    } else {  // create
+      const data = new FormData()
+      data.append('title', title)
+      data.append('description', description)
+      data.append('category', category)
+      data.append('image', image)
+
+      dispatch(createPost(data, {
+        onfinish: (response) => {
+          history.push(`/post/detail/${response.data.slug}`)
+        }
+      }))
+    }
   }
 
   const category_options = map(categories.results, category => ({
@@ -110,7 +149,7 @@ const PostCreate = () => {
 
         <Form.Button
           type='submit'
-          content='Criar' />
+          content={params.post_slug ? 'Editar' : 'Criar'} />
       </div>
     </Form>
   )

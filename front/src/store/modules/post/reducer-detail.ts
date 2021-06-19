@@ -19,6 +19,10 @@ export default (state = default_state, action) => {
     switch (action.type) {
       case PostTypes.FETCH_POST_DETAIL_SUCCESS:
         return action.payload
+      case PostTypes.EDIT_POST_SUCCESS:
+        if(action.payload.slug == state.slug)
+          return action.payload
+        return state
       default:
         return draft
     }
