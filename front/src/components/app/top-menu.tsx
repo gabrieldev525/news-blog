@@ -1,32 +1,32 @@
-// react imports
+// react
 import React from 'react'
 import { Link } from 'react-router-dom'
 
-// third party imports
+// third party
 import {
-  Button,
-  Divider,
-  Dropdown,
-  Header,
-  Icon,
-  Menu,
+  Menu
 } from 'semantic-ui-react'
 
-// statics
-import {Text} from './styles'
+// local
+import './styles.css'
 
 
-const TopMenu: React.FC<any> = (props) => {
+const TopMenu = () => {
   return (
-    <Menu attached='top' inverted borderless className='top-menu'>
-      <Menu.Item id='i-btnMenu' onClick={props.handleSidebarVisibleChange}>
-        <Icon name='sidebar' />
+    <Menu attached='top' borderless className='top-menu'>
+      <Menu.Menu position='left'>
+        <Menu.Item>Inicio</Menu.Item>
+        <Menu.Item>Categoria</Menu.Item>
+      </Menu.Menu>
+
+      <Menu.Item as={ Link } to='/' className='logo-menu'>
+        News Blog
       </Menu.Item>
-      <Menu.Item as={ Link } to='/'>
-        <Text>
-          Your project
-        </Text>
-      </Menu.Item>
+
+      <Menu.Menu position='right' className='no-margin right-menu-top'>
+        <Menu.Item>Login</Menu.Item>
+        <Menu.Item>Cadastro</Menu.Item>
+      </Menu.Menu>
     </Menu>
   )
 }

@@ -80,7 +80,8 @@ INSTALLED_APPS = [
 
     # project
     'accounts',
-    'core'
+    'core',
+    'post'
 ]
 
 MIDDLEWARE = [
@@ -307,7 +308,7 @@ MEDIA_URL = '/media/'
 # ### DJANGO REST FRAMEWORK ###
 
 REST_FRAMEWORK = {
-    'PAGE_SIZE': 50,
+    'PAGE_SIZE': 10,
     'MAX_PAGE_SIZE': 100,
     'DEFAULT_PAGINATION_CLASS': 'core.pagination.PageNumberPagination',
 
@@ -324,9 +325,9 @@ REST_FRAMEWORK = {
 
     # by default, only authenticated users may use the API
     'DEFAULT_PERMISSION_CLASSES': [
-        'rest_framework.permissions.IsAuthenticated',
+        # 'rest_framework.permissions.IsAuthenticated',
 
-        'core.permissions.IsOTPVerified'
+        # 'core.permissions.IsOTPVerified'
     ]
 }
 # ### DJANGO ALLAUTH ###

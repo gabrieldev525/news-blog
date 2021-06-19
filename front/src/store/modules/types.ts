@@ -1,6 +1,8 @@
-// local imports
-import { IUserState } from "./current_user/types"
+// local
+import { IUserState } from './current_user/types'
+import { IPostState } from './post/types'
 
 export interface IState {
-  current_user: IUserState
+  current_user: IUserState,
+  posts: IPostState
 }

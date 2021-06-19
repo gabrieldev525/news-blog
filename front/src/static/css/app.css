@@ -7,7 +7,7 @@
 /* MENU */
 
 .ui.menu.top-menu {
-    background-color: #24292e;
+    background-color: #ffffff;
     border-radius: unset;
     border-top: unset !important;
 }
@@ -15,38 +15,8 @@
 .ui.menu.top-menu .dropdown .menu{
     z-index: 970;
 }
-.ui.top-menu-filter{
-    z-index: 960;
-}
-
-.logo-menu {
-    width: 90px;
-}
-
-.top-menu-filter {
-    background-color: #24292e !important;
-}
 
 /* .ui.menu. */
-.secondary-menu {
-    background-color: #059be5 !important;
-    border-radius: unset;
-    border-top: unset !important;
-    margin: unset !important;
-    z-index: 950;
-}
-.ui.menu.secondary-menu .menu-dropdown {
-    z-index: 950;
-}
-.ui.menu.secondary-menu .dropdown{
-    z-index: 950;
-}
-
-.ui.secondary.inverted.pointing.menu.secondary-menu {
-    border-color: rgba(255,255,255,.1);
-    border-width: 2px 0px;
-}
-
 .menu-dropdown {
     min-width: 300px !important;
 }
@@ -65,4 +35,10 @@
 .ui.wide.left.sidebar, .ui.wide.right.sidebar {
     background-color: rgba(27,28,29,1.0);
     width: 210px;
+}
+
+
+/* global */
+.no-margin {
+    margin: 0 !important;
 }

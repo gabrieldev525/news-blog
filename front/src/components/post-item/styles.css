@@ -1,0 +1,27 @@
+.post-item {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 2%;
+    width: 30%;
+}
+.post-item.main-news {
+    width: 100%;
+}
+
+.post-item:not(:first-child) {
+    margin-left: 1%;
+}
+
+.post-item .post-image {
+    width: 100%;
+    max-width: 600px;
+    max-height: 300px;
+}
+.post-item .post-title {
+    font-size: 1.2rem;
+}
+
+.post-item .post-description {
+
+}

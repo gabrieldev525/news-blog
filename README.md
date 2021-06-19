@@ -1,6 +1,7 @@
 # blog
 
 ## Requirements:
+- python 3.8 or greater
 - docker and docker-compose
 - virtualenv or virtualenvwrapper
 - node js
@@ -8,6 +9,16 @@
 
 ## Instalation:
 ### backend:
+- package dependencies:
+You need install some dependencies of python packages before installing the requirements of project.
+In root folder, has a file named `debian.sh` that's contains all dependencies that you need to install.
+You can run each command manually, of install all once time:
+
+```bash
+    chmod +x debian.sh
+    ./debian.sh
+```
+
 - create a virtual environment and active it
 - install project backend dependencies: `pip install -r requirements/dev.txt`
 - start docker-compose for postgres: `docker-compose up -d`

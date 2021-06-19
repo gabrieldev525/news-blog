@@ -31,8 +31,14 @@ from two_factor.gateways.twilio.urls import urlpatterns as tf_twilio_urls
 from accounts.allauth_urls import urlpatterns as allauth_urls
 from accounts.tf_urls import urlpatterns as tf_urls
 from core import views as core_views
+from post.urls import urlpatterns as post_urls
 
 admin.site.__class__ = AdminSiteOTPRequired
+
+
+api_urls = [
+    path('post/', include(post_urls))
+]
 
 
 urlpatterns = [
@@ -43,6 +49,9 @@ urlpatterns = [
     path('', include(allauth_urls)),
     path('', include(tf_urls)),
     path('', include(tf_twilio_urls)),
+
+    # api
+    path('api/', include(api_urls)),
 
     # third party
     path('jsreverse/', cache_page(3600)(urls_js), name='js_reverse'),
