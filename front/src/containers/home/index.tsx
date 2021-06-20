@@ -13,6 +13,7 @@ import { IPostState } from '../../store/modules/post/types'
 import PostItem from '../../components/post-item'
 import Pagination from '../../components/pagination'
 import { getLocationFilters } from '../../components/utils/get-location-filters'
+import PostMenu from '../../components/post-menu'
 
 // Local
 import './styles.css'
@@ -37,26 +38,30 @@ const Home = () => {
     )
 
   return (
-    <>
-      <PostItem
-        data={posts.results[0]}
-        isRecentlyNews={true} />
+    <div className='home-content'>
+      <div className='post-list-content'>
+        <PostItem
+          data={posts.results[0]}
+          isRecentlyNews={true} />
 
-      <div className='post-list'>
-        {
-          posts.results.length > 1 &&
-            map(posts.results.slice(1), (post, key) => {
-              return (
-                <PostItem
-                  key={key}
-                  data={post} />
-              )
-            })
-        }
+        <div className='post-list'>
+          {
+            posts.results.length > 1 &&
+              map(posts.results.slice(1), (post, key) => {
+                return (
+                  <PostItem
+                    key={key}
+                    data={post} />
+                )
+              })
+          }
+        </div>
+
+        <Pagination data={posts} />
       </div>
 
-      <Pagination data={posts} />
-    </>
+      <PostMenu />
+    </div>
   )
 }
 

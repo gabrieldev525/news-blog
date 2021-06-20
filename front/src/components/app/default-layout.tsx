@@ -7,11 +7,11 @@ import TopMenu from './top-menu'
 
 const TMenu = ({children}) => {
 	return (
-    <div>
+    <>
       <TopMenu />
 
       { children }
-    </div>
+    </>
 	)
 }
 

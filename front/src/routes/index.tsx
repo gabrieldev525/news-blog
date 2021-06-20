@@ -10,7 +10,7 @@ import Post from '../containers/post'
 import PostForm from '../containers/post/post-form'
 import PostDetail from '../containers/post/post-detail'
 import CategoryList from '../containers/category/category-list'
-import Register from '../containers/register'
+import Register from '../containers/users/user-form'
 
 const Route: IRouteItem[] = [
   {

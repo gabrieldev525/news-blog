@@ -1,0 +1,15 @@
+.side-menu {
+    width: 15%;
+    background-color: rgb(241, 241, 241);
+    padding: 1%;
+    box-sizing: border-box;
+}
+
+.menu-month-list, .menu-post-list {
+    margin-left: 15%;
+}
+
+.menu-post-list {
+    display: flex;
+    flex-direction: column;
+}

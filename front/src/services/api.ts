@@ -1,47 +1,44 @@
-// third party imports
-import axios, { AxiosRequestConfig } from 'axios'
+// third party
+import axios from 'axios'
 import queryString from 'query-string'
-import { isEmpty } from 'lodash'
+import isEmpty from 'lodash/isEmpty'
 
-
-declare const window:any
-const AXIOS_CONFIG:AxiosRequestConfig = {
-  headers: {
-    xsrfCookieName: 'csrftoken',
-    xsrfHeaderName: 'X-CSRFToken'
-  },
+const requests = axios.create({
+  xsrfCookieName: 'csrftoken',
+  xsrfHeaderName: 'X-CSRFToken',
   params: {
     format: 'json'
   }
-}
-const dj_urls = window.dj_urls
+})
+
+export const dj_urls = window.dj_urls
 
 export const api = {
-  get(url:string, params={}, filters={}) {
+  get(url, params={}, filters={}, config={}) {
     url = dj_urls[url](params)
     const search = queryString.stringify(filters)
     if (!isEmpty(search))
       url = `${url}?${search}`
-    return axios.get(url, AXIOS_CONFIG)
+    return requests.get(url, config)
   },
 
-  post(url:string, params={}, data) {
+  post(url, params={}, data, config={}) {
     url = dj_urls[url](params)
-    return axios.post(url, data, AXIOS_CONFIG)
+    return requests.post(url, data, config)
   },
 
-  put(url:string, params, data, config={}) {
+  put(url, params, data, config={}) {
     url = dj_urls[url](params)
-    return axios.put(url, data, { ...AXIOS_CONFIG, ...config })
+    return requests.put(url, data, config)
   },
 
-  patch(url:string, params, data, config={}) {
+  patch(url, params, data, config={}) {
     url = dj_urls[url](params)
-    return axios.patch(url, data, { ...AXIOS_CONFIG, ...config })
+    return requests.patch(url, data, config)
   },
 
   delete(url, params, config={}) {
     url = dj_urls[url](params)
-    return axios.delete(url, { ...AXIOS_CONFIG, ...config })
+    return requests.delete(url, config)
   }
 }

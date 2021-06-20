@@ -8,6 +8,7 @@ import post_detail from './post/reducer-detail'
 import categories from './categories/reducer'
 import category_detail from './categories/reducer-detail'
 import users from './users/reducer'
+import menu from './menu/reducer'
 
 export default combineReducers({
   current_user,
@@ -15,5 +16,6 @@ export default combineReducers({
   post_detail,
   categories,
   category_detail,
-  users
+  users,
+  menu
 })
