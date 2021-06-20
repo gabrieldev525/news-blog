@@ -5,12 +5,14 @@ import { all } from 'redux-saga/effects'
 import current_user_saga from './current_user/sagas'
 import post_saga from './post/sagas'
 import category_saga from './categories/sagas'
+import user_saga from './users/sagas'
 
 
 export default function* rootSaga() {
   return yield all([
     current_user_saga,
     post_saga,
-    category_saga
+    category_saga,
+    user_saga
   ])
 }

@@ -10,12 +10,18 @@ import Post from '../containers/post'
 import PostForm from '../containers/post/post-form'
 import PostDetail from '../containers/post/post-detail'
 import CategoryList from '../containers/category/category-list'
+import Register from '../containers/register'
 
 const Route: IRouteItem[] = [
   {
     component: Landing,
     exact: true,
     path: '/',
+  },
+  {
+    component: Register,
+    exact: true,
+    path: '/register'
   },
   {
     component: Category,

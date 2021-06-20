@@ -98,7 +98,7 @@ const TopMenu = () => {
               <Menu.Item
                 as='a'
                 href={window.dj_urls['two_factor:login']()}>Login</Menu.Item>
-              <Menu.Item>Cadastro</Menu.Item>
+              <Menu.Item as={Link} to='/register'>Cadastro</Menu.Item>
             </>
           )
         }

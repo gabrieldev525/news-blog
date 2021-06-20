@@ -15,6 +15,7 @@ from allauth.account.forms import LoginForm as AllauthLoginForm
 from allauth.account.utils import passthrough_next_redirect_url
 from allauth.account.views import PasswordResetView
 from rest_framework.generics import GenericAPIView
+from rest_framework.generics import CreateAPIView
 from rest_framework.response import Response
 from two_factor.views import LoginView
 from two_factor.views import PhoneSetupView
@@ -22,6 +23,7 @@ from two_factor.views import SetupView
 
 # local
 from .serializers import UserSerializer
+from .utils import make_user_attr
 
 
 class CustomLoginView(LoginView):
@@ -126,3 +128,18 @@ class UserAPIView(GenericAPIView):
         instance = request.user
         serializer = self.get_serializer(instance)
         return Response(serializer.data)
+
+
+class UserCreateAPIView(CreateAPIView):
+    queryset = User.objects.all()
+    serializer_class = UserSerializer
+
+    def perform_create(self, serializer):
+        password = self.request.data.get('password')
+        cellphone = self.request.data.get('cellphone')
+
+        # create user
+        instance = serializer.save()
+
+        # update user
+        make_user_attr(instance, password, cellphone)

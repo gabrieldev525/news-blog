@@ -7,11 +7,13 @@ import posts from './post/reducer'
 import post_detail from './post/reducer-detail'
 import categories from './categories/reducer'
 import category_detail from './categories/reducer-detail'
+import users from './users/reducer'
 
 export default combineReducers({
   current_user,
   posts,
   post_detail,
   categories,
-  category_detail
+  category_detail,
+  users
 })
