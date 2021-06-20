@@ -1,12 +1,11 @@
-# django
-from django.urls import path
+
+# Third party
+from rest_framework.routers import DefaultRouter
 
 # local
 from .views import UserAPIView
-from .views import UserCreateAPIView
 
+routes = DefaultRouter(trailing_slash=False)
+routes.register(r'users', UserAPIView, 'users')
 
-urlpatterns = [
-    path('users/current', UserAPIView.as_view(), name='current_user'),
-    path('users/create', UserCreateAPIView.as_view(), name='user-create')
-]
+urlpatterns = routes.urls

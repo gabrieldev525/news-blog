@@ -13,7 +13,7 @@ type fetchCurrentUserType = ReturnType<typeof fetchCurrentUser>
 
 function* fetchCurrentUserSaga({ type }: fetchCurrentUserType) {
   try {
-    const response:AxiosResponse<IUserState> = yield call(api.get, 'current_user')
+    const response:AxiosResponse<IUserState> = yield call(api.get, 'users-get-current-user')
 
     if (response.status == 200)
       yield put(fetchCurrentUserSuccess(response.data))

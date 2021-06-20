@@ -24,7 +24,9 @@ def make_user_attr(user, password, cellphone):
         user.username = make_username(user.email)
 
     # make password
-    user.set_password(password)
+    if password:
+        user.set_password(password)
+
     user.save()
 
     if cellphone:

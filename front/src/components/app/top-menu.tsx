@@ -82,7 +82,10 @@ const TopMenu = () => {
 
         {
           current_user?.username && (
-            <Menu.Item as={Link} to='/post/create'>Criar Postagem</Menu.Item>
+            <>
+              <Menu.Item as={Link} to='/post/create'>Criar Postagem</Menu.Item>
+              <Menu.Item as={Link} to='/user/list'>Lista Usuários</Menu.Item>
+            </>
           )
         }
       </Menu.Menu>
@@ -105,7 +108,7 @@ const TopMenu = () => {
               <Menu.Item
                 as='a'
                 href={window.dj_urls['two_factor:login']()}>Login</Menu.Item>
-              <Menu.Item as={Link} to='/register'>Cadastro</Menu.Item>
+              <Menu.Item as={Link} to='/user/register'>Cadastro</Menu.Item>
             </>
           )
         }

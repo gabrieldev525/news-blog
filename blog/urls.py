@@ -37,7 +37,8 @@ admin.site.__class__ = AdminSiteOTPRequired
 
 
 api_urls = [
-    path('post/', include(post_urls))
+    path('post/', include(post_urls)),
+    path('accounts/', include('accounts.urls'), name='accounts')
 ]
 
 
@@ -58,7 +59,6 @@ urlpatterns = [
 
     # project
     path('', core_views.index_view, name='index'),
-    path('api/accounts/', include('accounts.urls'), name='accounts'),
 ]
 
 if settings.DEBUG:

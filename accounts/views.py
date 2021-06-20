@@ -14,9 +14,9 @@ from django.urls import reverse_lazy
 from allauth.account.forms import LoginForm as AllauthLoginForm
 from allauth.account.utils import passthrough_next_redirect_url
 from allauth.account.views import PasswordResetView
-from rest_framework.generics import GenericAPIView
-from rest_framework.generics import CreateAPIView
+from rest_framework.viewsets import ModelViewSet
 from rest_framework.response import Response
+from rest_framework.decorators import action
 from two_factor.views import LoginView
 from two_factor.views import PhoneSetupView
 from two_factor.views import SetupView
@@ -119,18 +119,7 @@ class CustomPasswordResetView(PasswordResetView):
         return ret
 
 
-class UserAPIView(GenericAPIView):
-
-    queryset = User.objects.all()
-    serializer_class = UserSerializer
-
-    def get(self, request, *args, **kwargs):
-        instance = request.user
-        serializer = self.get_serializer(instance)
-        return Response(serializer.data)
-
-
-class UserCreateAPIView(CreateAPIView):
+class UserAPIView(ModelViewSet):
     queryset = User.objects.all()
     serializer_class = UserSerializer
 
@@ -143,3 +132,19 @@ class UserCreateAPIView(CreateAPIView):
 
         # update user
         make_user_attr(instance, password, cellphone)
+
+    def perform_update(self, serializer):
+        password = self.request.data.get('password')
+        cellphone = self.request.data.get('cellphone')
+
+        # create user
+        instance = serializer.save()
+
+        # update user
+        make_user_attr(instance, password, cellphone)
+
+    @action(detail=False, methods=['get'], url_path='current_user')
+    def get_current_user(self, request, *args, **kwargs):
+        instance = request.user
+        serializer = self.get_serializer(instance)
+        return Response(serializer.data)

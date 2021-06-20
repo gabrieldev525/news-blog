@@ -12,7 +12,6 @@ class UserSerializer(ModelSerializer):
     class Meta:
         model = User
         exclude = [
-            'id',
             'date_joined',
             'groups',
             'password',
