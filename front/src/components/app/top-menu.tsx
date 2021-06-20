@@ -1,7 +1,7 @@
 // react
 import React, { useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
-import { Link } from 'react-router-dom'
+import { Link, useHistory, useLocation } from 'react-router-dom'
 
 // third party
 import {
@@ -16,6 +16,7 @@ import { map } from 'lodash'
 import { fetchCategories } from '../../store/modules/categories/actions'
 import { ICategoryState } from '../../store/modules/categories/types'
 import { IState } from '../../store/modules/types'
+import { IUserState } from '../../store/modules/current_user/types'
 
 // local
 import './styles.css'
@@ -25,9 +26,12 @@ const TopMenu = () => {
 
   // hooks
   const dispatch = useDispatch()
+  const history = useHistory()
+  const location = useLocation()
 
   // redux
   const categories: ICategoryState = useSelector<IState, ICategoryState>(store => store.categories)
+  const current_user = useSelector<IState, IUserState>(store => store.current_user)
 
   useEffect(() => {
     dispatch(fetchCategories())
@@ -81,8 +85,23 @@ const TopMenu = () => {
       </Menu.Item>
 
       <Menu.Menu position='right' className='no-margin right-menu-top'>
-        <Menu.Item>Login</Menu.Item>
-        <Menu.Item>Cadastro</Menu.Item>
+        {
+          current_user?.username ? (
+            <>
+              <Menu.Item>{current_user?.first_name ? current_user?.first_name : current_user?.username}</Menu.Item>
+              <Menu.Item
+                as='a'
+                href={window.dj_urls['account_logout']()}>Sair</Menu.Item>
+            </>
+          ) : (
+            <>
+              <Menu.Item
+                as='a'
+                href={window.dj_urls['two_factor:login']()}>Login</Menu.Item>
+              <Menu.Item>Cadastro</Menu.Item>
+            </>
+          )
+        }
       </Menu.Menu>
     </Menu>
   )

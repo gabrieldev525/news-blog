@@ -1,3 +1,8 @@
+declare interface Window {
+    dj_urls: Object
+}
+declare const dj_urls: object
+
 declare module "*.svg" {
     const content: any;
     export default content;

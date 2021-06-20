@@ -30,7 +30,7 @@ const CategoryList = () => {
 
   useEffect(() => {
     dispatch(fetchCategories(filters))
-  }, [filters])
+  }, [filters.page])
 
   const onClickRemoveCategory = (slug) => {
     dispatch(deleteCategory(slug))

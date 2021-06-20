@@ -29,7 +29,7 @@ const Home = () => {
 
   useEffect(() => {
     dispatch(fetchPosts(filters))
-  }, [filters])
+  }, [filters.page])
 
   if(posts.results.length == 0)
     return (
