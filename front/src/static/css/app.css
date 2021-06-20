@@ -10,6 +10,7 @@
     background-color: #ffffff;
     border-radius: unset;
     border-top: unset !important;
+    margin: 0 !important;
 }
 .ui.menu.top-menu .menu-dropdown,
 .ui.menu.top-menu .dropdown .menu{
