@@ -37,6 +37,9 @@ const CategoryCreate = () => {
   }, [params.category_slug])
 
   useEffect(() => {
+    if(!params.category_slug)
+      return
+
     setTitle(category_detail.title)
     setDescription(category_detail.description)
   }, [category_detail.slug])

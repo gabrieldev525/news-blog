@@ -8,6 +8,7 @@ import { Icon } from 'semantic-ui-react'
 import { deletePost, fetchPostDetail } from '../../store/modules/post/actions'
 import { IPost } from '../../store/modules/post/types'
 import { IState } from '../../store/modules/types'
+import { IUserState } from '../../store/modules/current_user/types'
 
 // Local
 import { IPostParams } from './types'
@@ -21,6 +22,7 @@ const PostDetail = () => {
 
   // redux
   const post_detail = useSelector<IState, IPost>(store => store.post_detail)
+  const current_user = useSelector<IState, IUserState>(store => store.current_user)
 
   const onClickRemovePost = () => {
     dispatch(deletePost(params.post_slug, {
@@ -36,18 +38,22 @@ const PostDetail = () => {
     <div className='post-detail-content'>
       <img src={post_detail?.image} className='post-detail-image' />
 
-      <div className='flex-row'>
-        <Icon
-          name='trash alternate'
-          color='red'
-          className='pointer'
-          onClick={onClickRemovePost} />
+      {
+        current_user?.username && (
+          <div className='flex-row'>
+            <Icon
+              name='trash alternate'
+              color='red'
+              className='pointer'
+              onClick={onClickRemovePost} />
 
-        <Icon
-          name='edit'
-          className='pointer'
-          onClick={() => history.push(`/post/edit/${params.post_slug}`)} />
-      </div>
+            <Icon
+              name='edit'
+              className='pointer'
+              onClick={() => history.push(`/post/edit/${params.post_slug}`)} />
+          </div>
+        )
+      }
 
       <h1>{post_detail?.title}</h1>
       <span>{post_detail?.description}</span>

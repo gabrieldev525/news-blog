@@ -26,8 +26,6 @@ const TopMenu = () => {
 
   // hooks
   const dispatch = useDispatch()
-  const history = useHistory()
-  const location = useLocation()
 
   // redux
   const categories: ICategoryState = useSelector<IState, ICategoryState>(store => store.categories)
@@ -43,11 +41,15 @@ const TopMenu = () => {
         <Menu.Item as={Link} to='/'>Inicio</Menu.Item>
         <Dropdown item text='Categorias'>
           <Dropdown.Menu>
-            <Dropdown.Item
-              icon='add'
-              content='criar nova categoria'
-              as={Link}
-              to='/category/create' />
+            {
+              current_user?.username && (
+                <Dropdown.Item
+                  icon='add'
+                  content='criar nova categoria'
+                  as={Link}
+                  to='/category/create' />
+              )
+            }
 
             <Divider horizontal />
 
@@ -77,7 +79,12 @@ const TopMenu = () => {
             }
           </Dropdown.Menu>
         </Dropdown>
-        <Menu.Item as={Link} to='/post/create'>Criar Postagem</Menu.Item>
+
+        {
+          current_user?.username && (
+            <Menu.Item as={Link} to='/post/create'>Criar Postagem</Menu.Item>
+          )
+        }
       </Menu.Menu>
 
       <Menu.Item as={ Link } to='/' className='logo-menu'>

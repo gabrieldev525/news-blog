@@ -47,6 +47,9 @@ const PostCreate = () => {
   }, [params.post_slug])
 
   useEffect(() => {
+    if(!params.post_slug)
+      return
+
     setTitle(post_detail.title)
     setDescription(post_detail.description)
     setImage(post_detail.image)

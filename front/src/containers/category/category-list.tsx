@@ -5,6 +5,7 @@ import { useHistory, useLocation } from 'react-router-dom'
 
 // Third party
 import { map } from 'lodash'
+import { Icon } from 'semantic-ui-react'
 
 // Project
 import { getLocationFilters } from '../../components/utils/get-location-filters'
@@ -12,7 +13,7 @@ import { deleteCategory, fetchCategories } from '../../store/modules/categories/
 import { ICategoryState } from '../../store/modules/categories/types'
 import { IState } from '../../store/modules/types'
 import Pagination from '../../components/pagination'
-import { Icon } from 'semantic-ui-react'
+import { IUserState } from '../../store/modules/current_user/types'
 
 
 const CategoryList = () => {
@@ -24,6 +25,7 @@ const CategoryList = () => {
 
   // redux
   const categories = useSelector<IState, ICategoryState>(store => store.categories)
+  const current_user = useSelector<IState, IUserState>(store => store.current_user)
 
   // others
   const filters = getLocationFilters(location)
@@ -46,18 +48,22 @@ const CategoryList = () => {
             <div className='flex-row'>
               <h3>{category.title}</h3>
 
-              <div className='flex-row'>
-                <Icon
-                  name='trash alternate'
-                  color='red'
-                  className='pointer'
-                  onClick={() => onClickRemoveCategory(category.slug)} />
+              {
+                current_user?.username && (
+                  <div className='flex-row'>
+                    <Icon
+                      name='trash alternate'
+                      color='red'
+                      className='pointer'
+                      onClick={() => onClickRemoveCategory(category.slug)} />
 
-                <Icon
-                  name='edit'
-                  className='pointer'
-                  onClick={() => history.push(`/category/edit/${category.slug}`)}/>
-              </div>
+                    <Icon
+                      name='edit'
+                      className='pointer'
+                      onClick={() => history.push(`/category/edit/${category.slug}`)}/>
+                  </div>
+                )
+              }
             </div>
           )
         })
