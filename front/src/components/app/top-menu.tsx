@@ -58,6 +58,19 @@ const TopMenu = () => {
                 )
               })
             }
+
+            {
+              categories.results.length > 10 && (
+                <>
+                  <Divider horizontal />
+
+                  <Dropdown.Item
+                    content='Todas as categorias'
+                    as={Link}
+                    to='/category/' />
+                </>
+              )
+            }
           </Dropdown.Menu>
         </Dropdown>
         <Menu.Item as={Link} to='/post/create'>Criar Postagem</Menu.Item>
