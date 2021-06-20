@@ -9,6 +9,7 @@ import CategoryForm from '../containers/category/category-form'
 import Post from '../containers/post'
 import PostForm from '../containers/post/post-form'
 import PostDetail from '../containers/post/post-detail'
+import CategoryList from '../containers/category/category-list'
 
 const Route: IRouteItem[] = [
   {
@@ -21,6 +22,11 @@ const Route: IRouteItem[] = [
     exact: false,
     path: '/category',
     routes: [
+      {
+        component: CategoryList,
+        exact: true,
+        path: '/category'
+      },
       {
         component: CategoryDetail,
         exact: true,

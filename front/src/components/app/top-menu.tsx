@@ -67,7 +67,7 @@ const TopMenu = () => {
                   <Dropdown.Item
                     content='Todas as categorias'
                     as={Link}
-                    to='/category/' />
+                    to='/category' />
                 </>
               )
             }
