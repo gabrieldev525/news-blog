@@ -28,3 +28,24 @@ export const createCategory = (data: ICategory, callback={}) => {
     callback
   }
 }
+
+export const deleteCategory = (slug, callback={}) => {
+  return {
+    payload: {
+      slug
+    },
+    type: CategoryTypes.DELETE_CATEGORY,
+    callback
+  }
+}
+
+export const editCategory = (slug, data, callback={}) => {
+  return {
+    payload: {
+      slug,
+      data
+    },
+    type: CategoryTypes.EDIT_CATEGORY,
+    callback
+  }
+}

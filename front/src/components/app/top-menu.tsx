@@ -37,33 +37,29 @@ const TopMenu = () => {
     <Menu attached='top' borderless className='top-menu'>
       <Menu.Menu position='left'>
         <Menu.Item as={Link} to='/'>Inicio</Menu.Item>
-        {
-          categories.results.length > 0 && (
-            <Dropdown item text='Categorias'>
-              <Dropdown.Menu>
-                <Dropdown.Item
-                  icon='add'
-                  content='criar nova categoria'
-                  as={Link}
-                  to='/category/create' />
+        <Dropdown item text='Categorias'>
+          <Dropdown.Menu>
+            <Dropdown.Item
+              icon='add'
+              content='criar nova categoria'
+              as={Link}
+              to='/category/create' />
 
-                <Divider horizontal />
+            <Divider horizontal />
 
-                {
-                  map(categories.results, (category, key) => {
-                    return (
-                      <Dropdown.Item
-                        key={key}
-                        as={Link}
-                        to={`/category/detail/${category.slug}`}
-                        content={category.title} />
-                    )
-                  })
-                }
-              </Dropdown.Menu>
-            </Dropdown>
-          )
-        }
+            {
+              map(categories.results, (category, key) => {
+                return (
+                  <Dropdown.Item
+                    key={key}
+                    as={Link}
+                    to={`/category/detail/${category.slug}`}
+                    content={category.title} />
+                )
+              })
+            }
+          </Dropdown.Menu>
+        </Dropdown>
         <Menu.Item as={Link} to='/post/create'>Criar Postagem</Menu.Item>
       </Menu.Menu>
 

@@ -1,14 +1,14 @@
 // React
 import React, { useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
-import { useParams } from 'react-router-dom'
+import { useHistory, useParams } from 'react-router-dom'
 import PostItem from '../../components/post-item'
 
 // Third party
 import { map } from 'lodash'
 
 // Project
-import { fetchCategoryDetail } from '../../store/modules/categories/actions'
+import { deleteCategory, fetchCategoryDetail } from '../../store/modules/categories/actions'
 import { ICategory } from '../../store/modules/categories/types'
 import { fetchPosts } from '../../store/modules/post/actions'
 import { IPostState } from '../../store/modules/post/types'
@@ -18,16 +18,24 @@ import '../home/styles.css'
 
 // Local
 import { ICategoryDetailParams } from './types'
+import { Icon } from 'semantic-ui-react'
 
 const CategoryDetail = () => {
 
   // hooks
   const params: ICategoryDetailParams = useParams()
   const dispatch = useDispatch()
+  const history = useHistory()
 
   // redux
   const category_detail = useSelector<IState, ICategory>(store => store.category_detail)
   const posts = useSelector<IState, IPostState>(store => store.posts)
+
+  const onClickRemoveCategory = () => {
+    dispatch(deleteCategory(params.category_slug, {
+      onfinish: () => history.push('/')
+    }))
+  }
 
   useEffect(() => {
     dispatch(fetchCategoryDetail(params.category_slug))
@@ -40,7 +48,22 @@ const CategoryDetail = () => {
 
   return (
     <>
-      <h1>{category_detail?.title}</h1>
+      <div className='flex-row'>
+        <h1>{category_detail?.title}</h1>
+
+        <div className='flex-row'>
+          <Icon
+            name='trash alternate'
+            color='red'
+            className='pointer'
+            onClick={onClickRemoveCategory} />
+
+          <Icon
+            name='edit'
+            className='pointer'
+            onClick={() => history.push(`/category/edit/${category_detail.slug}`)}/>
+        </div>
+      </div>
 
       <div className='post-list'>
         {

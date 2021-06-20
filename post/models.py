@@ -18,7 +18,7 @@ class Post(TitleSlugDescriptionModel, TimeStampedModel):
         upload_to='post')
 
     category = models.ForeignKey(
-        Category, related_name='posts', on_delete=models.CASCADE)
+        Category, related_name='posts', on_delete=models.SET_NULL, null=True)
 
     class Meta:
         ordering = ['-created', '-modified']
