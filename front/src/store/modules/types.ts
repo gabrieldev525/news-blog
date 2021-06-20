@@ -11,5 +11,6 @@ export interface IState {
   categories: ICategoryState,
   category_detail: ICategory,
   menu: IMenu,
-  users: IUserList
+  users: IUserList,
+  user_detail: IUserState
 }

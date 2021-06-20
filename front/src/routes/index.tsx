@@ -31,6 +31,11 @@ const Route: IRouteItem[] = [
         path: '/user/register'
       },
       {
+        component: UserForm,
+        exact: true,
+        path: '/user/edit/:user_id'
+      },
+      {
         component: UserList,
         exact: true,
         path: '/user/list'

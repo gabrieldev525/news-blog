@@ -2,12 +2,14 @@
 from django.contrib.auth.models import User
 
 # third party
-from rest_framework.serializers import ModelSerializer
+from rest_framework import serializers
 
 # local
 
 
-class UserSerializer(ModelSerializer):
+class UserSerializer(serializers.ModelSerializer):
+
+    cellphone = serializers.CharField(source='profile.phone', read_only=True)
 
     class Meta:
         model = User

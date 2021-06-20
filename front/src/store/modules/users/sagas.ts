@@ -86,8 +86,60 @@ function* deleteUser({ type, payload, callback }) {
 }
 
 
+function* fetchUserDetail({ type, payload, callback }) {
+  const { pk } = payload
+
+  try {
+    const response:AxiosResponse<IUserState> = yield call(api.get, 'users-detail', { pk })
+
+    if (response.status == 200) {
+      yield put({
+        payload: response.data,
+        type: UserTypes.FETCH_USER_DETAIL_SUCCESS
+      })
+
+      if(typeof(callback) == 'object' && has(callback, 'onfinish'))
+        callback.onfinish(response)
+    }
+  } catch (error) {
+    showErrorMessage(error, 'Aconteceu um erro ao tentar buscar as informações do usuário')
+
+    if(typeof(callback) == 'object' && has(callback, 'onerror'))
+      callback.onerror(error)
+  }
+}
+
+
+function* editUser({ type, payload, callback }) {
+  const { pk, data } = payload
+
+  try {
+    const response:AxiosResponse<IUserState> = yield call(api.patch, 'users-detail', { pk }, data)
+
+    if (response.status == 200) {
+      yield put({
+        payload: response.data,
+        type: UserTypes.EDIT_USER_SUCCESS
+      })
+
+      toast.success('Usuário editado com sucesso')
+
+      if(typeof(callback) == 'object' && has(callback, 'onfinish'))
+        callback.onfinish(response)
+    }
+  } catch (error) {
+    showErrorMessage(error, 'Aconteceu um erro ao tentar editar as informações do usuário')
+
+    if(typeof(callback) == 'object' && has(callback, 'onerror'))
+      callback.onerror(error)
+  }
+}
+
+
 export default all([
   takeLatest(UserTypes.CREATE_USER, createUser),
   takeLatest(UserTypes.FETCH_USERS, fetchUserList),
-  takeLatest(UserTypes.DELETE_USER, deleteUser)
+  takeLatest(UserTypes.DELETE_USER, deleteUser),
+  takeLatest(UserTypes.FETCH_USER_DETAIL, fetchUserDetail),
+  takeLatest(UserTypes.EDIT_USER, editUser),
 ])

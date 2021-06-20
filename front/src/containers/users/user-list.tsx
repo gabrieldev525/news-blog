@@ -1,10 +1,10 @@
 // React
 import React, { useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
-import { useLocation } from 'react-router-dom'
+import { useHistory, useLocation } from 'react-router-dom'
 
 // Third party
-import { Icon, Table } from 'semantic-ui-react'
+import { Button, Icon, Table } from 'semantic-ui-react'
 import { map } from 'lodash'
 
 // Project
@@ -20,6 +20,7 @@ const UserList = () => {
   // hooks
   const dispatch = useDispatch()
   const location = useLocation()
+  const history = useHistory()
 
   // redux
   const userList = useSelector<IState, IUserList>(store => store.users)
@@ -53,7 +54,8 @@ const UserList = () => {
 
               <Icon
                 name='edit'
-                className='pointer' />
+                className='pointer'
+                onClick={() => history.push(`/user/edit/${user.id}`)} />
             </div>
           </Table.Cell>
         </Table.Row>
@@ -63,7 +65,10 @@ const UserList = () => {
 
   return (
     <>
-      <h1>Lista de usuários</h1>
+      <div className='flex-row'>
+        <h1>Lista de usuários</h1>
+        <Button content='Criar usuário' onClick={() => history.push('/user/register')} />
+      </div>
 
       <Table>
         <Table.Header>

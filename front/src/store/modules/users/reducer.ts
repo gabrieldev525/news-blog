@@ -1,6 +1,6 @@
 // third party
 import produce from 'immer'
-import { remove } from 'lodash'
+import { findIndex, remove } from 'lodash'
 import { Reducer } from 'redux'
 
 // Project
@@ -28,6 +28,11 @@ const current_user: Reducer<IUserListState> = (state = default_state, action) =>
         const removedUsers = remove(draft.results, o => o.id == action.payload)
         if(removedUsers)
           draft.count--
+        return draft
+      case UserTypes.EDIT_USER_SUCCESS:
+        const userIdx = findIndex(draft.results, o => o.username == action.payload.username)
+        if(userIdx != -1)
+          draft.results[userIdx] = action.payload
         return draft
       default:
         return draft

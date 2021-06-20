@@ -2,6 +2,9 @@
 import { Reducer } from 'redux'
 import produce from 'immer'
 
+// Project
+import { UserTypes as UsersTypes } from '../users/types'
+
 // local imports
 import { IUserState, UserTypes } from './types'
 
@@ -12,6 +15,10 @@ const current_user:Reducer<IUserState> = (state = STATE_DEFAULT, action) => {
     switch (action.type) {
       case UserTypes.FETCH_CURRENT_USER_SUCCESS:
         return action.payload
+      case UsersTypes.EDIT_USER_SUCCESS:
+        if(action.payload.username == state?.username)
+          draft = action.payload
+        return draft
       default:
         return draft
     }

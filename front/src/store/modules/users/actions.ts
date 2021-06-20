@@ -28,3 +28,24 @@ export const deleteUser = (pk, callback={}) => {
     callback
   }
 }
+
+export const fetchUserDetail = (pk, callback={}) => {
+  return {
+    type: UserTypes.FETCH_USER_DETAIL,
+    payload: {
+      pk
+    },
+    callback
+  }
+}
+
+export const editUser = (pk, data, callback={}) => {
+  return {
+    type: UserTypes.EDIT_USER,
+    payload: {
+      pk,
+      data
+    },
+    callback
+  }
+}
