@@ -17,6 +17,7 @@ import { ICategoryState } from '../../store/modules/categories/types'
 // Local
 import { IPostParams } from './types'
 import { IPost } from '../../store/modules/post/types'
+import { IUserState } from '../../store/modules/current_user/types'
 
 
 const PostCreate = () => {
@@ -35,6 +36,12 @@ const PostCreate = () => {
   // redux
   const categories = useSelector<IState, ICategoryState>(store => store.categories)
   const post_detail = useSelector<IState, IPost>(store => store.post_detail)
+  const current_user = useSelector<IState, IUserState>(store => store.current_user)
+
+  if(current_user && !current_user.username)
+    return (
+      <h1>Você não tem permissão para visualizar essa página</h1>
+    )
 
   useEffect(() => {
     dispatch(fetchCategories())

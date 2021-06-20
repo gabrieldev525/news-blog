@@ -28,6 +28,12 @@ const Register = () => {
 
   // redux
   const user_detail = useSelector<IState, IUserState>(store => store.user_detail)
+  const current_user = useSelector<IState, IUserState>(store => store.current_user)
+
+  if(current_user && !current_user.username && params.user_id)
+    return (
+      <h1>Você não tem permissão para visualizar essa página</h1>
+    )
 
   useEffect(() => {
     if(params.user_id) {

@@ -14,6 +14,7 @@ import { ICategory } from '../../store/modules/categories/types'
 
 // Local
 import { ICategoryDetailParams } from './types'
+import { IUserState } from '../../store/modules/current_user/types'
 
 
 const CategoryCreate = () => {
@@ -29,6 +30,12 @@ const CategoryCreate = () => {
 
   // redux
   const category_detail = useSelector<IState, ICategory>(store => store.category_detail)
+  const current_user = useSelector<IState, IUserState>(store => store.current_user)
+
+  if(current_user && !current_user.username)
+    return (
+      <h1>Você não tem permissão para visualizar essa página</h1>
+    )
 
   useEffect(() => {
     if(params.category_slug) {
