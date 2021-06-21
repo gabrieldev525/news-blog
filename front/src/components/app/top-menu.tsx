@@ -18,9 +18,6 @@ import { ICategoryState } from '../../store/modules/categories/types'
 import { IState } from '../../store/modules/types'
 import { IUserState } from '../../store/modules/current_user/types'
 
-// local
-import './styles.css'
-
 
 const TopMenu = () => {
 
@@ -90,11 +87,9 @@ const TopMenu = () => {
         }
       </Menu.Menu>
 
-      <Menu.Item as={ Link } to='/' className='logo-menu'>
-        News Blog
-      </Menu.Item>
+      {/* <Menu.Item as={ Link } to='/' className='logo-menu'></Menu.Item> */}
 
-      <Menu.Menu position='right' className='no-margin right-menu-top'>
+      <Menu.Menu position='right' className='right-menu-top'>
         {
           current_user?.username ? (
             <>

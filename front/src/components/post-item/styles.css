@@ -4,6 +4,7 @@
     align-items: center;
     padding: 2%;
     width: 30%;
+    margin-bottom: 2%;
 }
 .post-item.main-news {
     width: 100%;
@@ -17,11 +18,11 @@
     width: 100%;
     max-width: 600px;
     max-height: 300px;
+    border-radius: 14px;
 }
 .post-item .post-title {
     font-size: 1.2rem;
 }
-
-.post-item .post-description {
-
+.post-item .post-title a {
+    color: #5037EB !important;
 }

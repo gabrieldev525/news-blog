@@ -14,6 +14,9 @@ import { IUserList, IUserState } from '../../store/modules/current_user/types'
 import { IState } from '../../store/modules/types'
 import Pagination from '../../components/pagination'
 
+// Local
+import './styles.css'
+
 
 const UserList = () => {
 
@@ -64,10 +67,13 @@ const UserList = () => {
   }
 
   return (
-    <>
+    <div className='main-content'>
       <div className='flex-row'>
         <h1>Lista de usuários</h1>
-        <Button content='Criar usuário' onClick={() => history.push('/user/register')} />
+        <Button
+          className='main-button margin-left-auto'
+          content='Criar usuário'
+          onClick={() => history.push('/user/register')} />
       </div>
 
       <Table>
@@ -85,7 +91,7 @@ const UserList = () => {
       </Table>
 
       <Pagination data={userList} />
-    </>
+    </div>
   )
 }
 

@@ -92,7 +92,7 @@ const CategoryCreate = () => {
   }
 
   return (
-    <Form onSubmit={handleSubmit}>
+    <Form onSubmit={handleSubmit} className='form-base'>
       <Form.Input
         name='title'
         fluid
@@ -115,6 +115,7 @@ const CategoryCreate = () => {
           onClick={() => history.push('/')} />
 
         <Form.Button
+          className='form-button-submit'
           content={params.category_slug ? 'Editar' : 'Criar'} />
       </div>
     </Form>

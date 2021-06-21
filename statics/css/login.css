@@ -1,5 +1,5 @@
 body {
-  background-color: #cccccc;
+  background-color: #ebebeb;
   background-repeat: repeat;
 }
 
@@ -32,4 +32,9 @@ body {
 
 .margin-auto {
   margin: auto !important;
+}
+
+.ui.button.positive {
+  background-color: #5037EB !important;
+  color: #fff !important;
 }

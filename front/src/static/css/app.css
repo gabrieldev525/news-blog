@@ -1,6 +1,5 @@
 /* APP */
 .app {
-    background-color: #ECEFF1;
     min-height: calc(100vh - 113px);
 }
 
@@ -11,6 +10,7 @@
     border-radius: unset;
     border-top: unset !important;
     margin: 0 !important;
+    padding: 1% !important;
 }
 .ui.menu.top-menu .menu-dropdown,
 .ui.menu.top-menu .dropdown .menu{
@@ -43,10 +43,67 @@
 .no-margin {
     margin: 0 !important;
 }
+.margin-top {
+    margin-top: 2rem !important;
+}
 
 .flex-row {
     display: flex !important;
 }
+.flex-column {
+    display: flex !important;
+    flex-direction: column !important;
+}
+
+.align-center {
+    align-items: center;
+}
+
 .pointer {
     cursor: pointer !important;
+}
+
+.form-base {
+    width: 50%;
+    margin: 2% auto;
+}
+.form-base input, .form-base textarea, .form-base .dropdown {
+    background: transparent !important;
+    border-radius: 14px !important;
+    resize: none !important;
+    color: #505050 !important;
+}
+.form-base .form-button-submit button, .main-button {
+    background: #5037EB !important;
+    color: #fff !important;
+    transition: 0.25s !important;
+}
+
+.form-base .form-button-submit button {
+    margin-left: 10px !important;
+}
+
+.form-base .form-button-submit:hover button {
+    color: #fff !important;
+    background: #3e27cf !important;
+}
+
+.margin-left-auto {
+    margin-left: auto !important;
+}
+
+
+.ui.table thead th {
+    background: #5037EB !important;
+    color: #fff !important;
+}
+
+
+
+.item-action-button {
+    margin-top: 10px;
+}
+
+.item-action-button .icon {
+    margin: 0 10px !important;
 }

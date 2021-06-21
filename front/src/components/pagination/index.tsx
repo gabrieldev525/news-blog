@@ -33,7 +33,7 @@ const Pagination = ({ data, onPageChange }: { data: IStateDefaultType, onPageCha
 
   return (
     <>
-      <Grid className='margin-top-small'>
+      <Grid className='pagination-content'>
         <Grid.Row>
           <Grid.Column width={6} className='flex-center'>
             {

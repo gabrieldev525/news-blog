@@ -120,7 +120,7 @@ const PostCreate = () => {
   }))
 
   return (
-    <Form onSubmit={handleSubmit}>
+    <Form onSubmit={handleSubmit} className='form-base'>
       <Form.Input
         name='title'
         fluid
@@ -159,6 +159,7 @@ const PostCreate = () => {
 
         <Form.Button
           type='submit'
+          className='form-button-submit'
           content={params.post_slug ? 'Editar' : 'Criar'} />
       </div>
     </Form>

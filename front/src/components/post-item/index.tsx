@@ -33,9 +33,16 @@ const PostItem = ({ data, isRecentlyNews=false }: IPostItem) => {
     <div className={`post-item ${isRecentlyNews && 'main-news'}`}>
       <img className='post-image' src={data.image} />
 
+      <h1 className='post-title'>
+        <Link to={`/post/detail/${data.slug}`}>{data.title}</Link>
+      </h1>
+      <span className='post-description'>
+        { truncate(data.description, { length: 80 }) }
+      </span>
+
       {
         current_user?.username && (
-          <div className='flex-row'>
+          <div className='flex-row item-action-button'>
             <Icon
               name='trash alternate'
               color='red'
@@ -49,13 +56,6 @@ const PostItem = ({ data, isRecentlyNews=false }: IPostItem) => {
           </div>
         )
       }
-
-      <h1 className='post-title'>
-        <Link to={`/post/detail/${data.slug}`}>{data.title}</Link>
-      </h1>
-      <span className='post-description'>
-        { truncate(data.description, { length: 80 }) }
-      </span>
     </div>
   )
 }

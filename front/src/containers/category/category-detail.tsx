@@ -50,12 +50,12 @@ const CategoryDetail = () => {
 
   return (
     <>
-      <div className='flex-row'>
+      <div className='flex-column align-center margin-top'>
         <h1>{category_detail?.title}</h1>
 
         {
           current_user?.username && (
-            <div className='flex-row'>
+            <div className='flex-row item-action-button'>
               <Icon
                 name='trash alternate'
                 color='red'

@@ -15,4 +15,9 @@ code {
 
 body, html, #root {
   height: 100%;
+  background-color: #f6f6f6;
+}
+
+* {
+  color: rgb(68, 68, 68);
 }

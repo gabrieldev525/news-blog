@@ -40,7 +40,7 @@ const PostDetail = () => {
 
       {
         current_user?.username && (
-          <div className='flex-row'>
+          <div className='flex-row item-action-button'>
             <Icon
               name='trash alternate'
               color='red'
@@ -55,7 +55,7 @@ const PostDetail = () => {
         )
       }
 
-      <h1>{post_detail?.title}</h1>
+      <h1 className='post-title'>{post_detail?.title}</h1>
       <span>{post_detail?.description}</span>
     </div>
   )

@@ -11,6 +11,9 @@ import { IUserParams } from './types'
 import { IState } from '../../store/modules/types'
 import { IUserState } from '../../store/modules/current_user/types'
 
+// Local
+import './styles.css'
+
 
 const Register = () => {
   // state
@@ -115,10 +118,10 @@ const Register = () => {
   }
 
   return (
-    <>
+    <div className='main-content user-content'>
       <h1>{params.user_id ? 'Editar usuário' : 'Cadastro usuário'}</h1>
 
-      <Form onSubmit={handleSubmit}>
+      <Form onSubmit={handleSubmit} className='form-base user-form'>
         <Form.Input
           name='first_name'
           label='Nome'
@@ -166,11 +169,12 @@ const Register = () => {
 
           <Form.Button
             type='submit'
+            className='form-button-submit'
             content={params.user_id ? 'Editar' : 'Criar'} />
         </div>
       </Form>
 
-    </>
+    </div>
   )
 }
 

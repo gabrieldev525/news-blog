@@ -1,8 +1,13 @@
 .side-menu {
     width: 15%;
-    background-color: rgb(241, 241, 241);
+    background-color:#5037EB;
     padding: 1%;
     box-sizing: border-box;
+}
+
+.side-menu * {
+    color: #fff;
+    font-size: 1.1rem;
 }
 
 .menu-month-list, .menu-post-list {
@@ -12,4 +17,12 @@
 .menu-post-list {
     display: flex;
     flex-direction: column;
+}
+
+.menu-post-item {
+    color: #fdd22a;
+    transition: 0.25s;
+}
+.menu-post-item:hover {
+    color: #dab216;
 }
