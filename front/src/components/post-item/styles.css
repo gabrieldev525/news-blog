@@ -26,3 +26,7 @@
 .post-item .post-title a {
     color: #5037EB !important;
 }
+
+.post-description {
+    text-align: center;
+}
