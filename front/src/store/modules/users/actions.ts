@@ -49,3 +49,9 @@ export const editUser = (pk, data, callback={}) => {
     callback
   }
 }
+
+export const clearUser = () => {
+  return {
+    type: UserTypes.CLEAR_USER
+  }
+}

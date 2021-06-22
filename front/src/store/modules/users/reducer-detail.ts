@@ -15,6 +15,8 @@ const user_detail: Reducer<IUserState> = (state = {}, action) => {
     switch (action.type) {
       case UserTypes.FETCH_USER_DETAIL_SUCCESS:
         return action.payload
+      case UserTypes.CLEAR_USER:
+        return {}
       default:
         return draft
     }

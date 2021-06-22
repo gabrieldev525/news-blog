@@ -6,7 +6,7 @@ import { useDispatch, useSelector } from 'react-redux'
 // Third party
 import { Form, InputOnChangeData } from 'semantic-ui-react'
 import { toast } from 'react-toastify'
-import { createUser, editUser, fetchUserDetail } from '../../store/modules/users/actions'
+import { clearUser, createUser, editUser, fetchUserDetail } from '../../store/modules/users/actions'
 import { IUserParams } from './types'
 import { IState } from '../../store/modules/types'
 import { IUserState } from '../../store/modules/current_user/types'
@@ -58,7 +58,11 @@ const Register = () => {
       setEmail(user_detail.email)
     if(user_detail.cellphone)
       setCellphone(user_detail.cellphone)
-  })
+
+    return () => {
+      dispatch(clearUser())
+    }
+  }, [user_detail.id])
 
   const handleChange = (event: FormEvent, { value, name }: InputOnChangeData) => {
     if(name == 'first_name')
